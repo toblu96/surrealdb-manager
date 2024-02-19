@@ -1,0 +1,16 @@
+services:
+  surrealdb:
+    image: surrealdb/surrealdb:latest
+    restart: unless-stopped
+    user: root
+    ports:
+      - "8000:8000"
+    deploy:
+      resources:
+        limits:
+          memory: 1.5G
+    volumes:
+      - "surrealdb-data:/mydata"
+    command: start --auth --log trace --user root --pass root file:/mydata/mydatabase.db
+volumes:
+  surrealdb-data:
